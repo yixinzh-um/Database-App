@@ -1,0 +1,143 @@
+{% extends "base_menu_job.html" %}
+{% load humanize %} <!-- https://docs.djangoproject.com/en/3.0/ref/contrib/humanize -->
+
+{% block head %}
+<link rel="stylesheet" href="{% url 'jobs:static' 'detail.css' %}">
+<style>
+
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: none;
+  background-color: rgba(0,0,0,0.5); /*dim the background*/
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<span style="float: right;">
+({{ job.updated_at|naturaltime }})
+{% if job.owner == user %}
+<a href="{% url 'jobs:job_update' job.id %}"><i class="fa fa-pencil"></i></a>
+<a href="{% url 'jobs:job_delete' job.id %}"><i class="fa fa-trash"></i></a>
+{% endif %}
+</span>
+<header>
+<h1 class=subtitle>Job | {{ job.title }} </h1>
+<h3>Company | <a href="{% url 'jobs:employer_detail'  job.employer.id %}">{{ job.employer }}</a></h3>
+</header>
+<br>
+
+<div class='table'>
+<table class='other'>
+    <tr>
+        <th>Title </th>
+        <td>{{ job.title }}</td>
+    </tr>
+    <tr>
+        <th>Salary</th>
+        <td>${{ job.salary_l }}-{{ job.salary_h }}k</td>
+    </tr>
+    <tr>
+        <th>Location </th>
+        <td>{{ job.location }}</td>
+    </tr>
+    <tr>
+        <th>Industry</th>
+        <td>{{ job.employer.industry }}</td>
+    </tr>
+    <tr>
+        <th>Sector </th>
+        <td>{{ job.sector }}</td>
+    </tr>
+    <tr>
+        <th>Rating </th>
+        <td>{{ job.rating}}</td>
+    </tr>
+    <tr>
+        <th>Easy Apply </th>
+        <td>{{ job.easy_apply }}</td>
+    </tr>
+</table>
+<table class='company'>
+
+    <tr>
+
+        <th>Company </th>
+        <td>{{ job.employer }}</td>
+    </tr>
+    <tr>
+        <th>Headquarters </th>
+        <td>{{ job.employer.headquarters}}</td>
+    </tr>
+    <tr>
+        <th>Size </th>
+        <td>{{ job.employer.size}}</td>
+    </tr>
+    <tr>
+        <th>Founded </th>
+        <td>{{ job.employer.founded}}</td>
+    </tr>
+    <tr>
+        <th>Ownership Type</th>
+        <td>{{ job.employer.ownership_type }}</td>
+    </tr>
+
+    <tr>
+        <th>Revenue</th>
+        <td>{{ job.employer.revenue }}</td>
+    </tr>
+    <tr>
+        <th>Competitor</th>
+        <td>{{ job.employer.competitors }}</td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div class='description'>
+<h2>Description</h2>
+<p>{{job.description|safe}}</p>
+</div>
+
+{% if job.content_type %}
+<img style="float:right; max-width:50%;" src="{% url 'jobs:job_picture' job.id %}"
+    onclick="document.getElementById('overlay').style.display = 'block';">
+{% endif %}
+<p>
+{{ job.text }}
+
+{% if user %}
+<br clear="all"/>
+<p>
+{% load crispy_forms_tags %}
+<form method="post" action="{% url 'jobs:job_comment_create' job.id %}">
+    {% csrf_token %}
+    {{ comment_form|crispy }}
+<input type="submit" value="Submit">
+<input type="submit" value="All Jobs" onclick="window.location.href='{% url 'jobs:all' %}';return false;">
+</form>
+</p>
+{% endif %}
+
+
+{% for comment in comments %}
+<p id='comment'> {{ comment.text }}
+({{ comment.updated_at|naturaltime }})
+{% if user == comment.owner %}
+<a href="{% url 'jobs:job_comment_delete' comment.id %}"><i class="fa fa-trash"></i></a>
+{% endif %}
+</p>
+{% endfor %}
+</p>
+
+<p>
+<a href="{% url 'jobs:all' %}">All jobs</a>
+</p>
+{% endblock %}
+
+

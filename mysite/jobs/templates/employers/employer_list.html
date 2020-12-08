@@ -1,0 +1,59 @@
+{% extends "base_menu_job.html" %}
+{% block head %}
+<link rel="stylesheet" href="{% url 'jobs:static' 'list.css' %}">
+{% endblock %}
+{% block content %}
+<header>
+  <h1>Company List</h1>
+</header>
+  {% if employer_list %}
+  <!--<ul>-->
+  <!--  {% for employer in employer_list %}-->
+  <!--    <li>-->
+  <!--        {{ employer.name }}-->
+  <!--       (<a href="{% url 'jobs:employer_update' employer.id %}">Update</a> |-->
+  <!--        <a href="{% url 'jobs:employer_delete' employer.id %}">Delete</a>)-->
+  <!--    </li>-->
+  <!--  {% endfor %}-->
+  <!--</ul>-->
+<ul>
+  {% for employer in employer_list %}
+    <li class='job'>
+
+
+<div class='table'>
+    <h2><a href="{% url 'jobs:employer_detail'  employer.id %}">{{ employer.name }}</a></h2>
+<table class='employer_detail'>
+    <tr>
+        <th>Headquarters </th>
+        <td>{{ employer.headquarters}}</td>
+    </tr>
+    <tr>
+        <th>Industry</th>
+        <td>{{ employer.industry }}</td>
+    </tr>
+    <tr>
+        <th>Ownership Type</th>
+        <td>{{ employer.ownership_type }}</td>
+    </tr>
+
+
+
+</table>
+</div>
+    </li>
+  {% endfor %}
+</ul>
+  {% else %}
+    <p>There are no employers in the library.</p>
+  {% endif %}
+
+  <p><a href="{% url 'jobs:employer_create' %}">Add a employer</a></p>
+
+  <p>
+    <a href="{% url 'jobs:all' %}">Back to jobs</a>
+  </p>
+
+
+
+{% endblock %}

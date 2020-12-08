@@ -1,0 +1,92 @@
+.job{
+    display: inline-block;
+    width:22%;
+    height:80%;
+    border: solid 5px #FFFFFF;
+    padding: 5px;
+    background-color: rgba(30,0,0,0.8);
+    text-align: center;
+    margin:1%;
+
+}
+h1{
+    text-align:center;
+    margin:20px;
+
+}
+h2{
+    font-size:2.2rem;
+    font-weight: bold;
+    display:inline-block;
+    height:100px;
+
+}
+
+h3.subtitle{
+    font-size:2rem;
+}
+h3{
+    font-size:1.5rem;
+}
+header{
+    padding:10px;
+}
+th{
+    width:50%;
+}
+th,td{
+    padding:6px;
+    font-size:1.5rem;
+    height:30px;
+}
+
+table{
+    display: block;
+    padding: 5px;
+    text-align: left;
+    margin:0 auto;
+
+
+}
+table.company{
+    width:47%;
+    float:right;
+
+}
+table.other{
+    width:47%;
+    float:left;
+}
+
+table.employer_detail th{
+    text-align:right;
+    padding: 5px 40px 5px 10px;
+    width:50%;
+}
+
+table.employer_detail td{
+    text-align:left;
+}
+div.description{
+    clear:both;
+    background-color:rgba(0, 0, 0, 0.7);
+    padding:2%;
+    text-align:justify;
+}
+div.table{
+    display: inline-block;
+    border-top: solid 5px #FFFFFF;
+    border-bottom: solid 5px #FFFFFF;
+    padding: 5px;
+    background-color: rgba(30,0,0,0.8);
+    text-align: left;
+    margin:10px auto;
+
+
+}
+a{
+    color:hotpink;
+}
+a:hover {
+  color: hotpink;
+}

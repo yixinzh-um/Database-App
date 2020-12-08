@@ -1,0 +1,130 @@
+{% extends "base_menu_job.html" %}
+{% load humanize %} <!-- https://docs.djangoproject.com/en/3.0/ref/contrib/humanize -->
+
+{% block head %}
+<link rel="stylesheet" href="{% url 'jobs:static' 'detail.css' %}">
+<style>
+
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: none;
+  background-color: rgba(0,0,0,0.5); /*dim the background*/
+}
+
+</style>
+{% endblock %}
+{% block content %}
+
+<header>
+  <h1 class=subtitle>{{ employer.name }}</h1>
+  <h3>Company</h3>
+
+</header>
+<span style="float: right;">
+({{ employer.updated_at|naturaltime }})
+{% if employer.owner == user %}
+<a href="{% url 'jobs:employer_update' employer.id %}"><i class="fa fa-pencil"></i></a>
+<a href="{% url 'jobs:employer_delete' employer.id %}"><i class="fa fa-trash"></i></a>
+{% endif %}
+</span>
+
+<br>
+
+<div class='table'>
+<table class='employer_detail'>
+
+    <tr>
+        <th>Headquarters </th>
+        <td>{{ employer.headquarters}}</td>
+    </tr>
+    <tr>
+        <th>Size </th>
+        <td>{{ employer.size}}</td>
+    </tr>
+    <tr>
+        <th>Founded </th>
+        <td>{{ employer.founded}}</td>
+    </tr>
+    <tr>
+        <th>Ownership Type</th>
+        <td>{{ employer.ownership_type }}</td>
+    </tr>
+    <tr>
+        <th>Industry</th>
+        <td>{{ employer.industry }}</td>
+    </tr>
+    <tr>
+        <th>Revenue</th>
+        <td>{{ employer.revenue }}</td>
+    </tr>
+    <tr>
+        <th>Competitor</th>
+        <td>{{ employer.competitor }}</td>
+    </tr>
+
+</table>
+</div>
+<br>
+{% if job_list %}
+hello
+<ul>
+  {% for job in job_list %}
+
+    <li class='job'>
+
+        <h2><a href="{% url 'jobs:job_detail'  job.id %}">{{ job.title }}</a></h2>
+        <h3> {{ job.employer }}</h3>
+        <h3> ${{ job.salary_l }}k-{{ job.salary_h }}k</h3>
+        <h3>{{ job.location }}</h3>
+        <h3> {{ job.rating }}</h3>
+        {% if job.owner == user %}
+
+        (<a href="{% url 'jobs:job_update' job.id %}">Edit</a> |
+        <a href="{% url 'jobs:job_delete' job.id %}">Delete</a>)
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <!-- Two hrefs with two stacked icons each - one showing and one hidden -->
+        <a href="#" onclick=
+            "favPost('{% url 'jobs:job_unfavorite' job.id %}', {{ job.id }} );return false;"
+            {% if job.id not in favorites %} style="display: none;" {% endif %}
+            id="favorite_star_{{job.id}}">
+        <span class="fa-stack" style="vertical-align: middle;">
+        <i class="fa fa-star fa-stack-1x" style="color: orange;"></i>
+        <i class="fa fa-star-o fa-stack-1x"></i>
+        </span>
+        </a>
+        <!-- the second href -->
+        <a href="#" onclick=
+             "favPost('{% url 'jobs:job_favorite' job.id %}', {{ job.id }} );return false;"
+            {% if job.id in favorites %} style="display: none;" {% endif %}
+            id="unfavorite_star_{{job.id}}">
+        <span class="fa-stack" style="vertical-align: middle;">
+        <i class="fa fa-star fa-stack-1x" style="display: none; color: orange;"></i>
+        <i class="fa fa-star-o fa-stack-1x"></i>
+        </span>
+        </a>
+        {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+  <p>There are no jobs in the database.</p>
+{% endif %}
+
+{% if job.content_type %}
+<img style="float:right; max-width:50%;" src="{% url 'jobs:job_picture' job.id %}"
+    onclick="document.getElementById('overlay').style.display = 'block';">
+{% endif %}
+
+<p>
+<a href="{% url 'jobs:employer_list' %}">All Companies</a>
+</p>
+{% endblock %}
+
+

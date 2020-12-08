@@ -2,13 +2,13 @@ div.navbar{
     font-size:50px;
 }
 
-body{
+/*body{*/
     /*background-color:#d8d8d8;*/
-    background-image: url("../static/hiring.jpg");
-    background-size: cover;
-    color:white;
+/*    background-image: url("../static/hiring.jpg");*/
+/*    background-size: cover;*/
+/*    color:white;*/
 
-}
+/*}*/
 header{
   background-color:rgba(0, 0, 0, 0.5);
   text-align:center;

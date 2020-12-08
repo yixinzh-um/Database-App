@@ -12,7 +12,7 @@
 
 }
 body{
-    /*background-color:#d8d8d8;*/
+    background-color:#ffffff;
     background-image: url("../static/hiring.jpg");
     background-size: cover;
     color:white;
@@ -23,7 +23,7 @@ header{
   background-color:rgba(0, 0, 0, 0.5);
   text-align:center;
   display: block;
-  /*padding: 10px 30px,30px,100px;*/
+  padding: 10px 30px,30px,100px;
   color: white;
 
 }
@@ -67,9 +67,11 @@ h3{
 h4{
     font-size:2rem;
 }
-.checked {
-    color: orange;
-}
+/*.checked {*/
+/*    color: orange;*/
+/*}*/
+
+/*<i class="fa fa-star fa-stack-1x" style="display: none; color: orange;">*/
 
 a{
     color:hotpink;
@@ -78,10 +80,10 @@ a:hover {
     color: hotpink;
 }
 
-<i class="fa fa-star fa-stack-1x" style="display: none; color: orange;">
 i.fa-star-o{
     color:orange;
 }
+
 
 td{
     text-align:left;

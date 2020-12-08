@@ -1,9 +1,10 @@
-body{
-    font-family:'Lucida Grande', sans-serif;
-    color: #FFFFFF;
-    background: #000000;
-}
+    body{
+    background-color:#ffffff;
+    background-image:{% url 'jobs:static' 'hiring.jpg' %};
+    background-size: cover;
+    color:white;
 
+}
 h1{
     font-size: 90px;
     text-align: center;

@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{% url 'jobs:static' 'list.css' %}">
 <!--<link rel="stylesheet" href=url("../static/list.css")>-->
 <style>
-body{
+div{
     background-color:#ffffff;
     background-image: url("../static/hiring.jpg");
     background-size: cover;
@@ -12,6 +12,12 @@ body{
 }
 </style>
 {% endblock %}
+
+
+
+
+
+
 
 {% block content %}
 <header>
@@ -105,8 +111,8 @@ body{
 <script>
 
 
-$('a.Fav').click(function(e) {
-  e.preventDefault();
-});
+// $('a.Fav').click(function(e) {
+//   e.preventDefault();
+// });
 </script>
 {% endblock %}

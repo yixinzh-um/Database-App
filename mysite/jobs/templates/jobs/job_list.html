@@ -3,13 +3,13 @@
 <link rel="stylesheet" href="{% url 'jobs:static' 'list.css' %}">
 <!--<link rel="stylesheet" href=url("../static/list.css")>-->
 <style>
-div{
-    background-color:#ffffff;
-    background-image: url("../static/hiring.jpg");
-    background-size: cover;
-    color:white;
+/*div{*/
+/*    background-color:#ffffff;*/
+/*    background-image: url("../static/hiring.jpg");*/
+/*    background-size: cover;*/
+/*    color:white;*/
 
-}
+/*}*/
 </style>
 {% endblock %}
 
@@ -20,6 +20,7 @@ div{
 
 
 {% block content %}
+<section>
 <header>
   <h1>Jobs</h1>
 
@@ -108,11 +109,17 @@ div{
 <a href="{% url 'login' %}?next={% url 'jobs:all' %}">Login</a>
 {% endif %}
 </p>
+</section>
 <script>
-
-
-// $('a.Fav').click(function(e) {
-//   e.preventDefault();
-// });
+function favPost(url, thing_id) {
+    console.log('Requesting JSON');
+    $.post(url, {},  function(rowz){
+        console.log(url, 'finished');
+        $("#unfavorite_star_"+thing_id).toggle();
+        $("#favorite_star_"+thing_id).toggle();
+    }).fail(function(xhr) {
+        alert('Url failed with '+xhr.status+' '+url);
+    });
+}
 </script>
 {% endblock %}

@@ -1,10 +1,11 @@
-    body{
+body{
     background-color:#ffffff;
     background-image:{% url 'jobs:static' 'hiring.jpg' %};
     background-size: cover;
     color:white;
 
 }
+
 h1{
     font-size: 90px;
     text-align: center;

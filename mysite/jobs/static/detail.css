@@ -9,6 +9,14 @@
     margin:1%;
 
 }
+section{
+    background-color:#ffffff;
+    background-image: url("../static/hiring.jpg");
+    background-repeat:no-repeat;
+    background-size: cover;
+    color:white;
+
+}
 h1{
     text-align:center;
     margin:20px;

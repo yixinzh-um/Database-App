@@ -1,15 +1,23 @@
 {% extends "base_menu_job.html" %}
 {% block head %}
 <link rel="stylesheet" href="{% url 'jobs:static' 'list.css' %}">
-<!--<link rel="stylesheet" href=url("../static/list.css")>-->
-<style>
-/*div{*/
-/*    background-color:#ffffff;*/
-/*    background-image: url("../static/hiring.jpg");*/
-/*    background-size: cover;*/
-/*    color:white;*/
 
-/*}*/
+<style>
+div{
+    background-color:#ffffff;
+    background-image: url("../static/hiring.jpg");
+    background-size: cover;
+    color:white;
+
+}
+section{
+    background-color:#ffffff;
+    background-image: url("../static/hiring.jpg");
+    background-repeat:no-repeat;
+    background-size: cover;
+    color:white;
+
+}
 </style>
 {% endblock %}
 
@@ -20,7 +28,7 @@
 
 
 {% block content %}
-<section>
+
 <header>
   <h1>Jobs</h1>
 
@@ -109,7 +117,7 @@
 <a href="{% url 'login' %}?next={% url 'jobs:all' %}">Login</a>
 {% endif %}
 </p>
-</section>
+
 <script>
 function favPost(url, thing_id) {
     console.log('Requesting JSON');
